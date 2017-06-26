@@ -1,4 +1,2 @@
-{
-  "name": "zrfq",
-  "age": 12
-}
+var arr = ['apple','bannana','pear'];
+    console.log(arr.slice(-1));
