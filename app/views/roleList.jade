@@ -1,0 +1,67 @@
+extends layout
+
+block content
+  .managerList.roleList
+    .row.wrapper.border-bottom.white-bg.page-heading
+      .col-lg-10
+        h2 基础管理
+        ol.breadcrumb
+          li
+            span 基础管理
+          li.active
+            span 角色管理列表
+      .col-lg-2
+        a.newBtn.btn.btn-primary.btn-sm(id="newBtn",href="javascript:;") 点击新增
+
+    .wrapper.wrapper-content.animated.fadeInRight
+      .ibox-content.m-b-sm.border-bottom
+        .row
+          .col-sm-3
+            .form-group
+              label.control-label(for="product_name") 名称
+              input.form-control#product_name(name="product_name",placeholder="请输入名称" )
+          .col-sm-3
+            .form-group
+              label.control-label(for="status") 状态
+              select#status.form-control(name="status")
+                option(value="") 全部
+                option(value="1") 正常
+                option(value="2") 停用
+          .col-sm-1.col-sm-offset-4
+            .form-group
+              label.control-label(for="quantity",style="visibility:hidden") 查询
+              input#search.btn.btn-primary.form-control(name="search",type="button",value="查询",placeholder="search")
+      .row
+        .col-lg-12
+          .ibox
+            .ibox-content
+              table.table#table
+                thead#theadDom.footable-header
+                tbody#tbodyDom
+              #pageNation(style="text-align:center")
+                ul#pageLimit
+  script(src='/js/roleList.js')
+  script(id="rows",type="text/html").
+    {{each data.data.result as item i}}
+      <tr data-id="{{item._id}}" data-roleName="{{item.roleName}}" data-status ="{{item.status}}" data-remark ="{{item.remark}}"
+      data-hasMenuId="
+    {{if item.menuList && item.menuList.length > 0}}
+    {{each item.menuList as menuItem i}}
+    {{menuItem.menuId}},
+    {{/each}}
+    {{/if}}"
+    >
+    <td>{{item.roleName}}</td>
+    {{if item.status == 1}}
+      <td>正常</td>
+    {{else}}
+      <td>停用</td>
+    {{/if}}
+      <td>{{item.remark}}</td>
+      <td class="opera">
+      <a data-id="{{item.id}}" class="edit btn btn-primary btn-xs" href="javascript:;">编辑</a>
+      <a data-id="{{item.id}}" class="relevance btn btn-primary btn-xs" href="javascript:;">关联菜单项</a>
+      <a data-id="{{item.id}}" class="del btn btn-primary btn-xs" href="javascript:;">删除</a>
+      </td>
+    </tr>
+    {{/each}}

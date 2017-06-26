@@ -1,0 +1,98 @@
+extends layout
+
+block content
+  .managerList.userList
+    .row.wrapper.border-bottom.white-bg.page-heading
+      .col-lg-10
+        h2 基础管理
+        ol.breadcrumb
+          li
+            span 基础管理
+          li.active
+            span 用户管理列表
+      .col-lg-2
+        a.newBtn.btn.btn-primary.btn-sm(id="newBtn",href="javascript:;") 点击新增
+
+    .wrapper.wrapper-content.animated.fadeInRight
+      .ibox-content.m-b-sm.border-bottom
+        .row
+          .col-sm-2
+            .form-group
+              label.control-label(for="loginName") 用户名
+              input.form-control#loginName(name="loginName",placeholder="请输入用户名" )
+          .col-sm-2
+            .form-group
+              label.control-label(for="userType") 用户类型
+              select#userType.form-control(name="userType")
+                option(value="") 全部
+                option(value="1") 护士
+                option(value="2") 医生
+          .col-sm-2
+            .form-group
+              label.control-label(for="status") 状态
+              select#status.form-control(name="status")
+                option(value="") 全部
+                option(value="1") 正常
+                option(value="2") 停用
+          .col-sm-1.col-sm-offset-4
+            .form-group
+              label.control-label(for="quantity",style="visibility:hidden") 查询
+              input#search.btn.btn-primary.form-control(name="search",type="button",value="查询",placeholder="search")
+      .row
+        .col-lg-12
+          .ibox
+            .ibox-content
+              table.table#table
+                thead#theadDom.footable-header
+                tbody#tbodyDom
+              #pageNation(style="text-align:center")
+                ul#pageLimit
+  script(src='/js/userList.js')
+  script(id="rows",type="text/html").
+    {{each data.data.result as item i}}
+      <tr data-id="{{item._id}}" data-loginName="{{item.loginName}}" data-userType ="{{item.userType}}" data-nickName ="{{item.nickName}}" data-status ="{{item.status}}" data-createTime ="{{item.createTime}}" data-rfId ="{{item.rfId}}" data-inpatientAreaId ="{{item.inpatientAreaId}}" data-hasRoleId ="
+      {{if item.userRoleList && item.userRoleList.length > 0}}
+      {{each item.userRoleList as roleItem i}}
+      {{roleItem.roleId}},
+      {{/each}}
+      {{/if}}"
+        data-hasGroupId ="
+      {{if item.userGroupList && item.userGroupList.length > 0}}
+      {{each item.userGroupList as groupItem i}}
+      {{groupItem.groupId}},
+      {{/each}}
+      {{/if}}"
+        data-rgUserType ="
+      {{each item.userGroupList as groupItem i}}
+      {{groupItem.userType}}
+      {{/each}}"
+      >
+
+      <td>{{item.loginName}}</td>
+      {{if item.userType == 1}}
+        <td>护士</td>
+      {{else if item.userType == 2}}
+        <td>医生</td>
+      {{else if item.userType == 0}}
+        <td>管理员</td>
+      {{/if}}
+
+        <td>{{item.nickName}}</td>
+      {{if item.status == 1}}
+        <td>正常</td>
+      {{else if item.status == 2}}
+        <td>停用</td>
+      {{else if item.status == 0}}
+        <td>删除</td>
+      {{/if}}
+        <td class="col-sm-2">{{item.meta.createTime}}</td>
+        <td>{{item.rfId}}</td>
+        <td>{{item.inpatientAreaId}}</td>
+        <td class="opera col-sm-3">
+        <a data-id="{{item._id}}" class="edit btn btn-primary btn-xs" href="javascript:;">编辑</a>
+        <a data-id="{{item._id}}" class="relevance btn btn-primary btn-xs" href="javascript:;">关联角色</a>
+        <a data-id="{{item._id}}" class="group btn btn-primary btn-xs" href="javascript:;">关联分组</a>
+        <a data-id="{{item._id}}" class="del btn btn-primary btn-xs" href="javascript:;">删除</a>
+        </td>
+      </tr>
+    {{/each}}

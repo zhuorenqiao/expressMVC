@@ -1,0 +1,10 @@
+{
+  "status": "1000",
+  "list":[
+    {"name":"roleName","title":"名称"},
+    {"name":"status","title":"状态"},
+    {"name":"remark","title":"备注"},
+    {"name":"operation","title":"操作"}
+  ]
+}
+

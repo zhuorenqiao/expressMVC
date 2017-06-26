@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .middle-box.text-center.loginscreen.animated.fadeInDown
+    div
+      h1.logo-name
+        i.fa.fa-hospital-o(aria-hidden="true")
+    h3 看板-后台管理系统
+    p 登录入口
+    form.m-t#loginPageForm(role="form")
+      .form-group
+        input.form-control#user(type="text", name="user", placeholder="用户名")
+      .form-group
+        input.form-control#password(type="text", name="password", placeholder="密码")
+      .form-group
+        select#chooseRole.chooseRole.form-control(name="chooseRole")
+          option(value="") 请选择角色
+          each item,index in rolesList
+            if item.status == 1
+              option(value="#{item['_id']}") #{item.roleName}
+      button.login-submit.btn.btn-primary.block.full-width.m-b(type="button") 登录
+  script(src='/js/login.js')

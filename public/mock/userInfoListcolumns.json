@@ -1,0 +1,14 @@
+{
+  "status": "1000",
+  "list":[
+    {"name":"loginName","title":"用户名"},
+    {"name":"userType","title":"用户类型"},
+    {"name":"nickName","title":"用户姓名"},
+    {"name":"status","title":"状态"},
+    {"name":"createTime","title":"创建时间"},
+    {"name":"rfId","title":"设备ID"},
+    {"name":"InpatientAreaId","title":"病区ID"},
+    {"name":"oper","title":"操作"}
+  ]
+}
+

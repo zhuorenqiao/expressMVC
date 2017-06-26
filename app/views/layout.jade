@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width')
+    title= title
+    block css
+      link(rel='stylesheet', href='/components/vendor.css')
+      link(rel='stylesheet', href='/components/font-awesome/css/font-awesome.css')
+      link(rel='stylesheet', href='/css/common.css')
+      link(rel='stylesheet', href='/css/style.css')
+    block js
+      script(src='/components/vendor.js')
+      script(src='/js/common.js')
+      script(src='/components/layer/build/layer.js')
+      script(src='/components/bootstrap-paginator/bootstrap-paginator.min.js')
+      script(src='/components/jquery-validation/dist/jquery.validate.js')
+      if ENV_DEVELOPMENT
+        script(src='http://localhost:35729/livereload.js')
+  body
+    block content

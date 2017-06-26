@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 环球新闻网
+  section.section
+    h3 要闻
+  each item,index in articles
+    ul
+      li.articleItem
+        a(href="#{item.url}",title="#{item.title}") #{item.title}
+  section.section
+    h3 娱乐
+  each item,index in articles
+    ul
+      li.articleItem
+        a(href="#{item.url}",title="#{item.title}") #{item.title}
+  section.section
+    h3 视频
+  each item,index in articles
+    ul
+      li.articleItem
+        a(href="#{item.url}",title="#{item.title}") #{item.title}
